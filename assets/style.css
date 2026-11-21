@@ -1,0 +1,134 @@
+/* assets/style.css — Tema aplikasi Sistem Informasi Absensi Karyawan
+   Layout: sidebar gelap + area konten terang, kartu statistik, tabel data,
+   badge status, dan form. Tanpa framework, CSS murni. */
+:root{
+  --navy:#0e2a47; --navy-2:#123a63; --blue:#2563eb; --blue-dark:#1d4ed8;
+  --ink:#0f172a; --muted:#64748b; --line:#e2e8f0; --bg:#eef2f7;
+  --green:#15803d; --green-bg:#dcfce7; --amber:#b45309; --amber-bg:#fef3c7;
+  --red:#b91c1c; --red-bg:#fee2e2; --teal:#0f766e; --teal-bg:#ccfbf1;
+  --violet:#6d28d9; --violet-bg:#ede9fe; --radius:12px;
+  --shadow:0 1px 3px rgba(15,23,42,.08),0 4px 14px rgba(15,23,42,.05);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:14.5px;line-height:1.55}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+h1{font-size:22px;margin:0 0 4px}
+h2{font-size:16.5px;margin:0 0 10px}
+
+/* ===== Layout utama: sidebar + konten ===== */
+.layout{display:flex;min-height:100vh}
+.sidebar{width:232px;flex:0 0 232px;background:linear-gradient(180deg,var(--navy) 0%,var(--navy-2) 100%);color:#dbe7f5;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.brand{display:flex;align-items:center;gap:10px;padding:18px 18px 14px;border-bottom:1px solid rgba(255,255,255,.12)}
+.brand .logo{width:38px;height:38px;border-radius:10px;background:#fff;color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:19px}
+.brand strong{display:block;color:#fff;font-size:15.5px;line-height:1.25}
+.brand small{color:#9db8d6;font-size:11.5px}
+.menu{padding:12px 12px 6px;display:flex;flex-direction:column;gap:2px}
+.menu .menu-label{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#8fa9c7;padding:10px 10px 4px}
+.menu a{color:#dbe7f5;padding:9px 10px;border-radius:8px;display:flex;align-items:center;gap:10px;font-weight:500}
+.menu a:hover{background:rgba(255,255,255,.08);text-decoration:none;color:#fff}
+.menu a.active{background:var(--blue);color:#fff;box-shadow:0 2px 8px rgba(37,99,235,.45)}
+.menu a .ico{width:18px;text-align:center;font-size:15px}
+.sidebar .side-user{margin-top:auto;padding:14px 18px;border-top:1px solid rgba(255,255,255,.12);display:flex;gap:10px;align-items:center}
+.avatar{width:36px;height:36px;border-radius:50%;background:#f59e0b;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex:0 0 36px}
+.side-user strong{display:block;color:#fff;font-size:13.5px;line-height:1.3}
+.side-user small{color:#9db8d6;font-size:11.5px}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{background:#fff;border-bottom:1px solid var(--line);padding:12px 26px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:5}
+.topbar .page-title{font-size:17px;font-weight:700}
+.topbar .spacer{flex:1}
+.topbar .date{color:var(--muted);font-size:13px}
+.topbar .user-chip{display:flex;align-items:center;gap:9px;background:#f1f5f9;border:1px solid var(--line);padding:5px 12px 5px 5px;border-radius:999px}
+.topbar .user-chip .avatar{width:28px;height:28px;flex-basis:28px;font-size:11px}
+.topbar .logout{color:var(--red);font-weight:600}
+.container{max-width:1180px;width:100%;margin:0 auto;padding:24px 26px 34px}
+.page-head{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+.page-head p{margin:0;color:var(--muted)}
+.page-head .spacer{flex:1}
+.footer{margin-top:auto;text-align:center;color:var(--muted);font-size:12.5px;padding:16px;border-top:1px solid var(--line);background:#fff}
+
+/* ===== Kartu statistik & panel ===== */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:6px 0 18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);display:flex;gap:14px;align-items:center}
+.card .stat-ico{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:21px;flex:0 0 46px}
+.card strong{display:block;font-size:25px;line-height:1.15}
+.card span{color:var(--muted);font-size:13px}
+.ico-blue{background:#dbeafe}.ico-green{background:var(--green-bg)}.ico-amber{background:var(--amber-bg)}.ico-violet{background:var(--violet-bg)}
+.panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin-bottom:18px}
+.panel-head{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.panel-head .spacer{flex:1}
+.grid-2{display:grid;grid-template-columns:2fr 1fr;gap:18px;align-items:start}
+@media (max-width:900px){.grid-2{grid-template-columns:1fr}.sidebar{display:none}}
+
+/* ===== Tabel data ===== */
+table{width:100%;border-collapse:collapse;background:#fff}
+th,td{padding:10px 12px;text-align:left;vertical-align:middle}
+th{background:#f8fafc;color:#334155;font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;border-bottom:2px solid var(--line)}
+td{border-bottom:1px solid var(--line)}
+tbody tr:hover{background:#f8fafc}
+.table-wrap{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.table-wrap table{margin:0}
+.person{display:flex;align-items:center;gap:11px}
+.person .avatar{width:34px;height:34px;flex-basis:34px;font-size:12px}
+.person strong{display:block;line-height:1.3}
+.person small{color:var(--muted)}
+.av-1{background:#2563eb}.av-2{background:#0891b2}.av-3{background:#7c3aed}.av-4{background:#db2777}
+.av-5{background:#059669}.av-6{background:#d97706}.av-7{background:#475569}.av-8{background:#0f766e}
+.badge{display:inline-block;padding:2.5px 10px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.badge-green{background:var(--green-bg);color:var(--green)}
+.badge-amber{background:var(--amber-bg);color:var(--amber)}
+.badge-red{background:var(--red-bg);color:var(--red)}
+.badge-blue{background:#dbeafe;color:var(--blue-dark)}
+.badge-teal{background:var(--teal-bg);color:var(--teal)}
+.badge-violet{background:var(--violet-bg);color:var(--violet)}
+.badge-grey{background:#e2e8f0;color:#475569}
+.table-foot{display:flex;align-items:center;gap:10px;padding:11px 14px;color:var(--muted);font-size:13px;background:#fff}
+.table-foot .spacer{flex:1}
+.pager{display:flex;gap:6px}
+.pager a,.pager span{padding:4px 11px;border:1px solid var(--line);border-radius:7px;color:var(--ink);background:#fff}
+.pager .current{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:600}
+
+/* ===== Tombol, form, filter ===== */
+button,.btn{background:var(--blue);color:#fff;border:0;padding:9px 16px;cursor:pointer;text-decoration:none;display:inline-block;border-radius:8px;font-size:14px;font-weight:600;font-family:inherit}
+button:hover,.btn:hover{background:var(--blue-dark);text-decoration:none}
+.btn-light{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn-light:hover{background:#f1f5f9}
+.btn-green{background:#16a34a}.btn-green:hover{background:#15803d}
+.btn-red{background:#fff;color:var(--red);border:1px solid #fecaca}.btn-red:hover{background:var(--red-bg)}
+.btn-sm{padding:5px 11px;font-size:12.5px;border-radius:7px}
+.btn-edit{background:#eff6ff;color:var(--blue-dark);border:1px solid #bfdbfe}
+.btn-edit:hover{background:#dbeafe}
+.actions{display:flex;gap:6px;flex-wrap:wrap}
+.actions form{display:inline}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.toolbar .search{display:flex;gap:8px;flex:1;min-width:220px;max-width:420px}
+input,select,textarea{width:100%;padding:9px 12px;margin-top:4px;border:1px solid #cbd5e1;border-radius:8px;font:inherit;background:#fff;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:2px solid #bfdbfe;border-color:var(--blue)}
+input[type="checkbox"]{width:auto}
+form label{display:block;margin:12px 0;font-weight:600;font-size:13.5px}
+form label input,form label select,form label textarea{font-weight:400}
+.toolbar input,.toolbar select{margin-top:0;width:auto}
+.toolbar .search input{flex:1}
+.flash{padding:12px 16px;border-radius:10px;margin:0 0 16px;font-weight:500}
+.flash.success{background:var(--green-bg);color:var(--green)}
+.flash.error{background:var(--red-bg);color:var(--red)}
+.muted{color:var(--muted)}
+.checkin-box{text-align:center;padding:8px 4px}
+.checkin-box .clock{font-size:31px;font-weight:800;letter-spacing:.02em}
+
+/* ===== Halaman login ===== */
+.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 55%,#1d4ed8 130%);padding:24px}
+.login-card{background:#fff;border-radius:16px;box-shadow:0 18px 50px rgba(2,12,27,.35);width:100%;max-width:400px;padding:30px 30px 24px}
+.login-card .login-brand{display:flex;align-items:center;gap:11px;margin-bottom:6px}
+.login-card .login-brand .logo{width:42px;height:42px;border-radius:11px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:21px}
+.login-card h1{font-size:19px;margin:0;line-height:1.3}
+.login-card .sub{color:var(--muted);margin:2px 0 8px;font-size:13.5px}
+.login-card button{width:100%;padding:11px;margin-top:14px;font-size:15px}
+.login-demo{margin-top:20px;border-top:1px dashed var(--line);padding-top:14px}
+.login-demo h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:8px}
+.login-demo table{font-size:12.8px}
+.login-demo th,.login-demo td{padding:6px 8px;text-transform:none;letter-spacing:0}
+.login-demo th{background:none;border-bottom:1px solid var(--line);color:var(--muted)}
+.login-box{max-width:480px}
+@media (max-width:640px){.container{padding:18px 14px 28px}.topbar{padding:10px 14px}.topbar .date{display:none}table{font-size:13.5px}}
